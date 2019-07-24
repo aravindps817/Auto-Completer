@@ -52,12 +52,9 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
         this.isActive = true;
         this.counter = -1;
         this.arrayList.forEach((el, i) => {
-          let label = this.completerOptions.filterFields;
+          let label = this.completerOptions.formatString;
           Object.keys(el).forEach(k => {
-            // label = label.replace(k, this.arrayList[i][k] || '');
-            // label = label.replace(/null/g, '');
-            const re = new RegExp(this.arrayList[i][k] || '', 'gi');
-            label = label.replace(re, '<mark>' + this.arrayList[i][k] || '' + '</mark>');
+            label = label.replace(k, this.arrayList[i][k] || '');
             label = label.replace(/null/g, '');
           });
           this.results.push({ 'label': label, 'value': el });
