@@ -9,7 +9,7 @@ Download the component and add it into your module.
 ## Usage
 
 ```TypeScript
-import { AppAutocompleterComponent } from './app-endpoint-search/app-endpoint-search.component';
+import { AppAutocompleterComponent } from './app-autocompleter/app-autocompleter.component';
 
 @NgModule({
   declarations: [
