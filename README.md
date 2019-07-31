@@ -48,7 +48,8 @@ export class AppModule { }
 ## Parameters
 Name  | Description | Example | 
 ------------- | ------------- | -------------
-(selectedResult)  | On mouse click function and close button event | (selectedResult)="yourFunction($event)"
+(selectedCompleterResult)  | On mouse click function and close button event | (selectedCompleterResult)="yourFunction($event)"
+(emptyCompleterResult)  | returns search string on change event of no result condition | (emptyCompleterResult)="yourFunction($event)" 
 Placeholder  | placeholder for search box| [placeHolder]=" place holder values" 
 completerOptions  | pass as input for configuration | [completerOptions] ="yourOptions"
 httpOpticompleterOptionsons.size  | maximum size of search return (optional) | completerOptions.size = '20'
