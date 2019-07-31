@@ -1,5 +1,5 @@
 /**
- * A common http search component works on the basis of search string and endpoint
+ * A auto-completer search component works on the basis of search string and arraylist
  */
 import { Component, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 
@@ -25,7 +25,7 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.searchText = this.completerOptions.defaultValue || '';
+    this.searchText = this.completerOptions.defaultValue || this.defaultValue || '';
     this.placeHolder = this.placeHolder || 'Search';
   }
   ngOnChanges() {
@@ -34,7 +34,7 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
       this.searchText = '';
       this.results = [];
     }
-    this.searchText = this.completerOptions.defaultValue || '';
+    this.searchText = this.completerOptions.defaultValue || this.defaultValue || '';
   }
 
   /**
