@@ -30,7 +30,7 @@ export class AppModule { }
 
 //** in your html file"
   <app-autocompleter [completerOptions]="completerOptions" [clearField]="clearField" [placeHolder]="'Search'"
-  (selectedCompleterResult)="selectedResult($event)" (emptyCompleterResult)="emptyResult($event)"></app-autocompleter>
+  (onSelect)="selectedResult($event)" (onEmpty)="emptyResult($event)"></app-autocompleter>
 
 ##sample Object
 
@@ -48,8 +48,8 @@ export class AppModule { }
 ## Parameters
 Name  | Description | Example | 
 ------------- | ------------- | -------------
-(selectedCompleterResult)  | On mouse click function and close button event | (selectedCompleterResult)="yourFunction($event)"
-(emptyCompleterResult)  | returns search string on change event of no result condition | (emptyCompleterResult)="yourFunction($event)" 
+(onSelect)  | On mouse click function and close button event | (onSelect)="yourFunction($event)"
+(onEmpty)  | returns search string on change event of no result condition | (onEmpty)="yourFunction($event)" 
 Placeholder  | placeholder for search box| [placeHolder]=" place holder values" 
 completerOptions  | pass as input for configuration | [completerOptions] ="yourOptions"
 httpOpticompleterOptionsons.size  | maximum size of search return (optional) | completerOptions.size = '20'
@@ -63,7 +63,7 @@ completerOptions.defaultvalue  | A default value to be shown on search field (op
 
 ## Other functionalities
 
-To clear search field any time, use "clearField". The variable is passed in elasticsearch component intialization. Syntax is, this.clearField = new String('true');
+To clear search field any time, use "clearField". The variable is passed in autocompleter component intialization. Syntax is, this.clearField = new String('true');
 
 If you need to update the 'defualtValue' after intailization use new refernce for your options
 
@@ -75,9 +75,9 @@ this.clearField = new String('false');
 ```
 
 
-The "(selectedResult)" will emit "null" on close button usage, mouse click on error and no result cases. Handle your functions accordingly.
+The "(onSelect)" will emit "null" on close button usage, mouse click on error and no result cases. Handle your functions accordingly.
 
-On elastic error or no results the drop down will be showing "no results".
+On error or no results the drop down will be showing "no results".
 
 ## Contributing
 Pull requests are welcomed. For major changes, please open an issue first to discuss what you would like to change.
