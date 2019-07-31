@@ -30,7 +30,7 @@ export class AppModule { }
 
 //** in your html file"
   <app-autocompleter [completerOptions]="completerOptions" [clearField]="clearField" [placeHolder]="'Search'"
-  (selectedCompleterResult)="selectedResult($event)"></app-autocompleter>
+  (selectedCompleterResult)="selectedResult($event)" (emptyCompleterResult)="emptyResult($event)"></app-autocompleter>
 
 ##sample Object
 
