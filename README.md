@@ -30,7 +30,7 @@ export class AppModule { }
 
 //** in your html file"
   <app-autocompleter [completerOptions]="completerOptions" [clearField]="clearField" [placeHolder]="'Search'"
-  (onSelect)="selectedResult($event)" (onEmpty)="emptyResult($event)"></app-autocompleter>
+  (onSelect)="selectedResult($event)" [isError]="isError" (onEmpty)="emptyResult($event)"></app-autocompleter>
 
 ##sample Object
 
@@ -43,6 +43,8 @@ export class AppModule { }
     completerOptions.width = '100%';
     completerOptions.fontSize = '20px';
     completerOptions.defaultValue = 'My search Text';
+    completerOptions.errorMessage = 'Please fill the following mandatory field';
+
 ```
 
 ## Parameters
@@ -51,8 +53,9 @@ Name  | Description | Example |
 (onSelect)  | On mouse click function and close button event | (onSelect)="yourFunction($event)"
 (onEmpty)  | returns search string on change event of no result condition | (onEmpty)="yourFunction($event)" 
 Placeholder  | placeholder for search box| [placeHolder]=" place holder values" 
+isError | Highlighting search field on setting true and default stage on setting false | isError]="isError"
 completerOptions  | pass as input for configuration | [completerOptions] ="yourOptions"
-httpOpticompleterOptionsons.size  | maximum size of search return (optional) | completerOptions.size = '20'
+completerOptionsons.size  | maximum size of search return (optional) | completerOptions.size = '20'
 completerOptions.contextField | field to be shown on search field on mousedown event
 completerOptions.filterFields | filter for the output  | completerOptions.filterFields = 'firstindex | secondIndex'
 completerOptions.formatString | format for the output  | completerOptions.formatString = 'firstindex | secondIndex'
@@ -60,6 +63,7 @@ completerOptions.theme | Custom color for the search output (optional) | complet
 completerOptions.fontSize  | Font size of search result (optional)  | completerOptions.fontSize = '20px'
 completerOptions.width  | Width  of search (optional) | completerOptions.width = '100%'
 completerOptions.defaultvalue  | A default value to be shown on search field (optional)  | completerOptions.defaultValue = 'Your Default value'
+completerOptions.errorMessage |To dispaly error message on isError condition true | completerOptions.errorMessage = "Please fill the following mandatory field"
 
 ## Other functionalities
 
