@@ -1,5 +1,5 @@
 <div class="search-outer">
-  <input id="searchBox" type="text" (focusout) ="isActive = false" (click)="getAutoCompleterResult(completerOptions.arrayList ,searchText)"   placeholder="{{placeHolder}}" 
+  <input id="searchBox" #searchField type="text" (focusout) ="isActive = false" (click)="getAutoCompleterResult(completerOptions.arrayList ,searchText)"   placeholder="{{placeHolder}}" 
     (keydown.arrowdown) = "downArrowEvent($event);" 
     (keydown.esc) = "hideSearchResults();" 
     (keydown.arrowup) = "upArrowEvent($event);"
@@ -12,7 +12,7 @@
   <div class="sb-seachresults" *ngIf = "isActive" >
     <ul id="searchList" class="sb-results-dropdown-menu" [ngStyle]="{
       'color': completerOptions.theme,'width': completerOptions.width,'border-left-color': completerOptions.theme,'border-right-color': completerOptions.theme}" >      
-      <li  class="search-result-item" *ngFor="let result of results"
+      <li  class="search-result-item" *ngFor="let result of tempResults"
         (click)="emitSelectedObject(result.value)"  (mousedown)="emitSelectedObject(result.value)"
         [ngStyle]="{'color': completerOptions.theme,'font-size': completerOptions.fontSize}">
         <span [innerHTML]="result.label"></span>
@@ -20,3 +20,5 @@
     </ul> 
   </div>  
 </div>
+<div class="invalid-feedback d-block" *ngIf="isError">{{completerOptions.errorMsg}}</div>
+

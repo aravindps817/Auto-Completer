@@ -1,7 +1,7 @@
 /**
- * A auto-completer search component works on the basis of search string and arraylist
+ * auto-completer search component works on the basis of search string and arraylist
  */
-import { Component, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-autocompleter',
@@ -14,7 +14,10 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
   @Input() placeHolder;
   @Input() clearField;
   @Input() defaultValue;
-  @Output() selectedCompleterResult: EventEmitter<any> = new EventEmitter<any>();
+  @Input()  isError;
+  @ViewChild('searchField') searchField: ElementRef;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onEmpty: EventEmitter<any> = new EventEmitter<any>();
   searchText = '';
   tempSearchText = '';
   timer: any;
@@ -22,6 +25,8 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
   counter = -1;
   isActive = false;
   arrayList: any[];
+  tempResults: any[];
+
   constructor() { }
 
   ngOnInit() {
@@ -35,6 +40,8 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
       this.results = [];
     }
     this.searchText = this.completerOptions.defaultValue || this.defaultValue || '';
+    this.isError ? this.searchField.nativeElement.classList.add('is-invalid')
+                 : this.searchField.nativeElement.classList.remove('is-invalid');
   }
 
   /**
@@ -58,8 +65,10 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
             label = label.replace(/null/g, '');
           });
           this.results.push({ 'label': label, 'value': el });
+          this.tempResults = this.results.slice(0, 100);
         });
       } else {
+        this.onEmpty.emit({'searchString': this.searchText });
         this.results.push({ 'label': 'No results' });
       }
     }, 500);
@@ -90,11 +99,13 @@ export class AppAutocompleterComponent implements OnChanges, OnInit {
   emitSelectedObject(value) {
     this.counter = -1;
     if (value) {
-      this.selectedCompleterResult.emit(value);
+      this.onSelect.emit(value);
       this.searchText = value[this.completerOptions.contextField] || this.searchText;
+      this.completerOptions.defaultValue =  this.searchText;
     } else {
       this.searchText = '';
-      this.selectedCompleterResult.emit(null);
+      this.completerOptions.defaultValue = '';
+      this.onSelect.emit(null);
     }
     this.results = [];
     this.isActive = false;
